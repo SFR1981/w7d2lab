@@ -7,14 +7,18 @@ public class Computer {
     private int ram;
     private int hddSize;
 
+    private String dataString;
+    
     private IOutput outputDevice;
     private IInput inputDevice;
+    
 
     public Computer(int ram, int hddSize, IOutput outputDevice, IInput inputDevice) {
         this.ram = ram;
         this.hddSize = hddSize;
         this.outputDevice = outputDevice;
         this.inputDevice = inputDevice;
+        this.dataString = null;
 
     }
 
@@ -38,8 +42,8 @@ public class Computer {
         return this.getOutputDevice().outputData(data);
     }
 
-    public String inputData(String data) {
-        return this.getInputDevice().inputData(data);
+    public void inputData(String data) {
+        this.dataString = this.getInputDevice().inputData(data);
     }
 
 
@@ -49,5 +53,9 @@ public class Computer {
 
     public void setInputDevice(IInput inputDevice) {
         this.inputDevice = inputDevice;
+    }
+
+    public String getDataString() {
+        return dataString;
     }
 }

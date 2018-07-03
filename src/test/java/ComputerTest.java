@@ -75,13 +75,23 @@ public class ComputerTest {
 
     @Test
     public void canGetInputDataViaMouse(){
-        assertEquals("Click!", computer.inputData("Click!"));
+        computer.inputData("Click!");
+        assertEquals("Click!", computer.getDataString());
     }
 
     @Test
     public void canSetInputDevice(){
         computer.setInputDevice(keyboard);
-        assertEquals("Write: type", computer.inputData("type"));
+        computer.inputData("type");
+        assertEquals("Write: type", computer.getDataString());
+    }
+
+    @Test
+    public void canGetDataString(){
+        computer.inputData("Click!");
+        computer.setInputDevice(keyboard);
+        computer.inputData("type");
+        assertEquals("Write: type", computer.getDataString());
     }
 
 }
