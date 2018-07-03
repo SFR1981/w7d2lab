@@ -58,4 +58,11 @@ public class Computer {
     public String getDataString() {
         return dataString;
     }
+
+    public String outputDataString(){
+        return outputData(this.dataString);
+
+    }
+
+
 }

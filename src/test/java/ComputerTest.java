@@ -94,4 +94,10 @@ public class ComputerTest {
         assertEquals("Write: type", computer.getDataString());
     }
 
+    @Test
+    public void canOutputDataString(){
+        computer.inputData("Click!");
+        assertEquals("Click! is now on screen", computer.outputDataString());
+    }
+
 }
