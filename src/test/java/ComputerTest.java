@@ -1,7 +1,4 @@
-import device_management.Computer;
-import device_management.Monitor;
-import device_management.Printer;
-import device_management.Speaker;
+import device_management.*;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -11,11 +8,15 @@ import static org.junit.Assert.assertNotNull;
 public class ComputerTest {
     Computer computer;
     Monitor monitor;
+    Mouse mouse;
+    Keyboard keyboard;
 
     @Before
     public void before() {
         monitor = new Monitor(22, 786432);
-        computer = new Computer(8, 512, monitor);
+        mouse = new Mouse("PX-45");
+        keyboard = new Keyboard("BX-45");
+        computer = new Computer(8, 512, monitor, mouse);
     }
 
     @Test
@@ -42,21 +43,21 @@ public class ComputerTest {
     @Test
     public void canOutputDataViaPrinter(){
         Printer printer = new Printer("EPSON", "Stylus", 120, 4);
-        computer = new Computer(8,512, printer);
+        computer = new Computer(8,512, printer, mouse);
         assertEquals("printing: Holiday pictures", computer.outputData("Holiday pictures"));
     }
 
     @Test
     public void canOutputDataViaSpeaker(){
         Speaker speaker = new Speaker(100);
-        computer = new Computer(8,512, speaker);
+        computer = new Computer(8,512, speaker, mouse);
         assertEquals("playing: Beep!", computer.outputData("Beep!"));
     }
 
     @Test
     public void canOutputDataViaMonitor(){
         Monitor monitor = new Monitor(55, 1080);
-        computer = new Computer(8,512, monitor);
+        computer = new Computer(8,512, monitor, mouse);
         assertEquals("CSI is now on screen", computer.outputData("CSI"));
     }
 
@@ -65,6 +66,22 @@ public class ComputerTest {
         Printer printer = new Printer("EPSON", "Stylus", 120, 4);
         computer.setOutputDevice(printer);
         assertEquals("printing: dissertation", computer.outputData("dissertation"));
+    }
+    @Test
+    public void canGetInputDevice(){
+        assertNotNull(computer.getInputDevice());
+
+    }
+
+    @Test
+    public void canGetInputDataViaMouse(){
+        assertEquals("Click!", computer.inputData("Click!"));
+    }
+
+    @Test
+    public void canSetInputDevice(){
+        computer.setInputDevice(keyboard);
+        assertEquals("Write: type", computer.inputData("type"));
     }
 
 }
